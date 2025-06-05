@@ -555,6 +555,8 @@ def rasterize_to_pixels(
         assert colors.shape == image_dims + (N, channels), colors.shape
         assert opacities.shape == image_dims + (N,), opacities.shape
     if backgrounds is not None:
+        if packed:
+            backgrounds = backgrounds[0, 0, :]
         assert backgrounds.shape == image_dims + (channels,), backgrounds.shape
         backgrounds = backgrounds.contiguous()
     if masks is not None:
